@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>J V Naveen | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg: #050816;
+            --bg-alt: #0b1020;
+            --accent: #6366f1;
+            --accent-soft: rgba(99, 102, 241, 0.15);
+            --text: #f9fafb;
+            --muted: #9ca3af;
+            --card-bg: #111827;
+            --border: #1f2933;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #111827 0, #020617 40%, #000 100%);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul { list-style: none; }
+
+        /* Navbar */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            background: linear-gradient(to bottom, rgba(2,6,23,0.95), rgba(2,6,23,0.75), transparent);
+            border-bottom: 1px solid rgba(148,163,184,0.15);
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .nav-left h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            color: var(--muted);
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #22c55e);
+            transition: width 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Layout */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 3rem;
+        }
+
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid rgba(148,163,184,0.12);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: radial-gradient(circle, #a855f7, #6366f1);
+        }
+
+        .section-sub {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.75rem;
+        }
+
+        /* Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+            gap: 2.5rem;
+            align-items: center;
+            padding-top: 2rem;
+        }
+
+        .hero-left h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-role {
+            font-size: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .hero-summary {
+            color: var(--muted);
+            font-size: 0.98rem;
+            margin-bottom: 1.75rem;
+            max-width: 36rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .btn {
+            padding: 0.65rem 1.3rem;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(130deg, #6366f1, #22c55e);
+            box-shadow: 0 12px 30px rgba(37,99,235,0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 45px rgba(37,99,235,0.45);
+        }
+
+        .btn-ghost {
+            background: rgba(15,23,42,0.85);
+            border-color: rgba(148,163,184,0.5);
+            color: var(--muted);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(15,23,42,1);
+            border-color: var(--accent);
+            color: var(--text);
+            transform: translateY(-1px);
+        }
+
+        .hero-right {
+            position: relative;
+            justify-self: center;
+        }
+
+        .profile-card {
+            position: relative;
+            padding: 1.6rem 1.6rem 1.2rem;
+            border-radius: 1.25rem;
+            background: radial-gradient(circle at top, #1e293b 0, #020617 80%);
+            border: 1px solid rgba(148,163,184,0.35);
+            box-shadow: 0 18px 55px rgba(15,23,42,0.9);
+            width: min(100%, 340px);
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 999px;
+            border: 2px solid rgba(148,163,184,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.3rem;
+            font-weight: 700;
+            background: radial-gradient(circle at 20% 0, #22c55e, #6366f1);
+            margin-bottom: 1rem;
+        }
+
+        .profile-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .profile-role {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .profile-line {
+            font-size: 0.8rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin: 0.12rem 0;
+            word-break: break-all;
+        }
+
+        .profile-tag {
+            display: inline-flex;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: rgba(22,163,74,0.1);
+            border: 1px solid rgba(34,197,94,0.4);
+            color: #bbf7d0;
+            margin-top: 0.75rem;
+        }
+
+        .profile-glow {
+            position: absolute;
+            inset: -20%;
+            background: radial-gradient(circle at top, rgba(129,140,248,0.25), transparent 60%);
+            z-index: -1;
+            filter: blur(10px);
+        }
+
+        /* Skills */
+        .chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .chip {
+            padding: 0.35rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(148,163,184,0.35);
+            font-size: 0.8rem;
+            color: #e5e7eb;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            padding: 1rem 1rem 0.9rem;
+            border-radius: 1rem;
+            background: radial-gradient(circle at top left, rgba(129,140,248,0.12), rgba(15,23,42,0.95));
+            border: 1px solid rgba(55,65,81,0.8);
+        }
+
+        .skill-card h3 {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            padding: 1.25rem;
+            border-radius: 1.1rem;
+            background: radial-gradient(circle at top, rgba(56,189,248,0.13), rgba(15,23,42,0.98));
+            border: 1px solid rgba(56,189,248,0.45);
+            box-shadow: 0 14px 40px rgba(8,47,73,0.75);
+        }
+
+        .project-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-tagline {
+            color: var(--muted);
+            font-size: 0.83rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.86rem;
+            color: #e5e7eb;
+        }
+
+        /* Education */
+        .timeline {
+            border-left: 1px solid rgba(148,163,184,0.35);
+            padding-left: 1.3rem;
+            margin-top: 0.5rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.4rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -1.7rem;
+            top: 0.25rem;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #22c55e, #16a34a);
+            border: 2px solid #020617;
+        }
+
+        .timeline-degree {
+            font-size: 0.96rem;
+            font-weight: 600;
+        }
+
+        .timeline-inst {
+            font-size: 0.86rem;
+            color: var(--muted);
+        }
+
+        .timeline-meta {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 0.2rem;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+            gap: 2rem;
+        }
+
+        .contact-card {
+            padding: 1.4rem;
+            border-radius: 1.1rem;
+            background: radial-gradient(circle at top left, rgba(251,191,36,0.12), rgba(15,23,42,0.97));
+            border: 1px solid rgba(245,158,11,0.5);
+        }
+
+        .contact-card p {
+            font-size: 0.9rem;
+            color: #e5e7eb;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-item {
+            font-size: 0.88rem;
+            color: var(--muted);
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-item span.label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #a1a1aa;
+        }
+
+        .contact-item a {
+            color: #e5e7eb;
+        }
+
+        .contact-form {
+            padding: 1.4rem;
+            border-radius: 1.1rem;
+            background: rgba(15,23,42,0.95);
+            border: 1px solid rgba(148,163,184,0.35);
+        }
+
+        .contact-form-row {
+            margin-bottom: 0.9rem;
+        }
+
+        .contact-form-row label {
+            font-size: 0.8rem;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-form-row input,
+        .contact-form-row textarea {
+            width: 100%;
+            padding: 0.55rem 0.75rem;
+            border-radius: 0.6rem;
+            border: 1px solid rgba(75,85,99,0.9);
+            background: #020617;
+            color: var(--text);
+            font-size: 0.88rem;
+            outline: none;
+        }
+
+        .contact-form-row input:focus,
+        .contact-form-row textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px rgba(99,102,241,0.5);
+        }
+
+        .contact-form-row textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        footer {
+            border-top: 1px solid rgba(148,163,184,0.15);
+            padding: 1rem 0 1.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 840px) {
+            .hero,
+            .contact-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .hero-right {
+                order: -1;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            main {
+                padding-top: 1.5rem;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .hero-left h2 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 2.5rem 0;
+            }
+
+            .profile-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <div class="nav-left">
+            <span>Portfolio</span>
+            <h1>J V Naveen</h1>
+        </div>
+        <nav class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- HERO -->
+    <section id="home">
+        <div class="hero">
+            <div class="hero-left">
+                <div class="hero-role">Fresher • Java &amp; Python Developer</div>
+                <h2>Building my career in software development.</h2>
+                <p class="hero-summary">
+                    I’m a recent B.Tech graduate in Computer Science and Engineering (AI &amp; ML) with hands-on experience
+                    in Java, Python, MySQL, and web technologies. I enjoy solving real-world problems through clean,
+                    efficient code and I’m excited to contribute to high-impact software projects as I start my career.
+                </p>
+                <div class="hero-buttons">
+                    <a href="UpdatedResume.pdf" class="btn btn-primary" download>
+                        📄 Download Resume
+                    </a>
+                    <a href="#contact" class="btn btn-ghost">
+                        📬 Contact Me
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="profile-card">
+                    <div class="profile-glow"></div>
+                    <div class="profile-avatar">
+                        <span>N</span>
+                    </div>
+                    <div class="profile-name">Juturi Venkata Naveen</div>
+                    <div class="profile-role">B.Tech CSE (AI &amp; ML) • 2025 Pass-out</div>
+
+                    <div class="profile-line">📍 Andhra Pradesh, India</div>
+                    <div class="profile-line">
+                        ✉️ <a href="mailto:naveenjuturi3@gmail.com">naveenjuturi3@gmail.com</a>
+                    </div>
+                    <div class="profile-line">
+                        📞 <a href="tel:+919392672976">+91 93926 72976</a>
+                    </div>
+                    <div class="profile-line">
+                        🔗 <a href="https://www.linkedin.com/in/j-v-naveen-39282426a" target="_blank">
+                            linkedin.com/in/j-v-naveen-39282426a
+                        </a>
+                    </div>
+                    <span class="profile-tag">Open to software development roles</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <h2 class="section-title">
+            <span></span> About Me
+        </h2>
+        <p class="section-sub">
+            A quick snapshot of who I am and what I’m aiming for.
+        </p>
+        <p style="color:#e5e7eb; max-width: 44rem; font-size:0.95rem;">
+            I’m a motivated Computer Science graduate specializing in Artificial Intelligence and Machine Learning.
+            Throughout my academic journey, I have worked on projects ranging from IoT-based automation to full-stack
+            web solutions and backend-heavy console applications. I enjoy learning new technologies, writing clean and
+            modular code, and working in collaborative environments where I can grow both technically and personally.
+            I’m currently looking for a fresher opportunity where I can apply my skills in Java, Python, databases,
+            and web technologies to build reliable software and keep improving every day.
+        </p>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <h2 class="section-title">
+            <span></span> Skills
+        </h2>
+        <p class="section-sub">
+            Technologies and tools I’ve worked with so far.
+        </p>
+
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Languages</h3>
+                <div class="chip-row">
+                    <span class="chip">Java 8</span>
+                    <span class="chip">Python 3</span>
+                    <span class="chip">C basics</span>
+                    <span class="chip">Data Structures (Java)</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Web Technologies</h3>
+                <div class="chip-row">
+                    <span class="chip">HTML5</span>
+                    <span class="chip">CSS3</span>
+                    <span class="chip">JavaScript</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Databases</h3>
+                <div class="chip-row">
+                    <span class="chip">MySQL 8</span>
+                    <span class="chip">SQL Queries</span>
+                    <span class="chip">Relational Design</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Core Strengths</h3>
+                <div class="chip-row">
+                    <span class="chip">Problem Solving</span>
+                    <span class="chip">OOPs Concepts</span>
+                    <span class="chip">Debugging</span>
+                    <span class="chip">Team Collaboration</span>
+                    <span class="chip">Continuous Learning</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <h2 class="section-title">
+            <span></span> Projects
+        </h2>
+        <p class="section-sub">
+            A selection of academic and personal projects I’ve worked on.
+        </p>
+
+        <div class="projects-grid">
+            <article class="project-card">
+                <h3 class="project-title">Inventory Management System (Console-based)</h3>
+                <p class="project-tagline">Java • MySQL • Console Application</p>
+                <p class="project-desc">
+                    A Java and MySQL-based application to streamline inventory operations for small businesses. It
+                    supports product management, billing, and sales tracking with role-based access (Admin/Staff).
+                    Features include generating sales reports and low-stock alerts to minimize human errors and
+                    improve stock control.
+                </p>
+            </article>
+
+            <article class="project-card">
+                <h3 class="project-title">Naturopathy Based Website</h3>
+                <p class="project-tagline">HTML • CSS • JavaScript</p>
+                <p class="project-desc">
+                    A web application that promotes awareness of naturopathy and healthy living. It provides natural
+                    remedies and holistic practices for disease cure, educates users on the principles and benefits of
+                    naturopathy, and can be extended with modules for wellness tips, yoga guidance, and lifestyle
+                    recommendations.
+                </p>
+            </article>
+
+            <article class="project-card">
+                <h3 class="project-title">Automatic Watering System Using IoT</h3>
+                <p class="project-tagline">IoT • Sensors • Automation</p>
+                <p class="project-desc">
+                    An IoT-based solution that detects soil moisture and automatically waters plants when required.
+                    Designed for busy or traveling individuals, it helps prevent over-watering and ensures plant
+                    health, with scope for remote monitoring and manual control.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+        <h2 class="section-title">
+            <span></span> Education
+        </h2>
+        <p class="section-sub">
+            My academic journey and performance.
+        </p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-degree">Bachelor of Technology (CSE - AI &amp; ML)</div>
+                <div class="timeline-inst">Kalasalingam Academy of Research and Education</div>
+                <div class="timeline-meta">2021 – 2025 • CGPA: 9.0 / 10</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-degree">Board of Intermediate (MPC)</div>
+                <div class="timeline-inst">Sri Sai Vikas Junior College</div>
+                <div class="timeline-meta">2019 – 2021 • CGPA: 9.70 / 10</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-degree">Board of Secondary Education</div>
+                <div class="timeline-inst">Sri Sai Balaji High School</div>
+                <div class="timeline-meta">2018 – 2019 • CGPA: 9.80 / 10</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2 class="section-title">
+            <span></span> Contact
+        </h2>
+        <p class="section-sub">
+            Interested in hiring a fresher or discussing an opportunity? Let’s connect.
+        </p>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <p>
+                    I’m actively seeking software development roles where I can apply my skills in Java, Python,
+                    databases, and web technologies. If you think I might be a good fit for your team or project,
+                    feel free to reach out via email, phone, or LinkedIn.
+                </p>
+
+                <div class="contact-item">
+                    <span class="label">Email</span>
+                    <a href="mailto:naveenjuturi3@gmail.com">naveenjuturi3@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="label">Phone</span>
+                    <a href="tel:+919392672976">+91 93926 72976</a>
+                </div>
+                <div class="contact-item">
+                    <span class="label">Location</span>
+                    <span>Andhra Pradesh, India</span>
+                </div>
+                <div class="contact-item">
+                    <span class="label">LinkedIn</span>
+                    <a href="https://www.linkedin.com/in/j-v-naveen-39282426a" target="_blank">
+                        linkedin.com/in/j-v-naveen-39282426a
+                    </a>
+                </div>
+            </div>
+
+            <form class="contact-form" onsubmit="alert('Thank you! This demo form does not actually send emails.'); return false;">
+                <div class="contact-form-row">
+                    <label for="name">Your Name</label>
+                    <input id="name" type="text" placeholder="Recruiter / Hiring Manager">
+                </div>
+                <div class="contact-form-row">
+                    <label for="email">Your Email</label>
+                    <input id="email" type="email" placeholder="you@example.com">
+                </div>
+                <div class="contact-form-row">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Share details about the opportunity or how we can work together."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<footer>
+    © <span id="year"></span> J V Naveen. All rights reserved.
+</footer>
+
+<script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
